@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "27891429607",
+    "project_id": "second-choice-flutter",
+    "storage_bucket": "second-choice-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27891429607:android:f42a3a45a5be5bc3b0f242",
+        "android_client_info": {
+          "package_name": "com.example.second_choice_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5zrTqU6KhvX77G7FbBmZTtZxsy6KwJNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
