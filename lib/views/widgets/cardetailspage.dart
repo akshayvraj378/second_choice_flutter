@@ -102,14 +102,14 @@ class _DetailspagesState extends State<Detailspages> {
                           Row(
                             children: [
                               Icon(Icons.speed_rounded, color: Colors.brown),
-                              Text('59000 KM')
+                              Text( "${widget.productModel.kms}",)
                             ],
                           ),
                           Row(
                             children: [
                               Icon(Icons.info_outline_rounded,
                                   color: Colors.brown),
-                              Text('Diesel')
+                              Text( "${widget.productModel.fuel}",)
                             ],
                           )
                         ],
@@ -125,7 +125,7 @@ class _DetailspagesState extends State<Detailspages> {
                               children: [
                                 Icon(Icons.currency_rupee),
                                 Text(
-                                  '71,00,000',
+                                  "${widget.productModel.prize}",
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.w700),
@@ -149,7 +149,7 @@ class _DetailspagesState extends State<Detailspages> {
                           Column(
                             children: [
                               Icon(Icons.calendar_month, color: Colors.brown),
-                              Text('2014'),
+                              Text( "${widget.productModel.modelyear}",),
                               Text('Year')
                             ],
                           ),
@@ -157,14 +157,14 @@ class _DetailspagesState extends State<Detailspages> {
                             children: [
                               Icon(Icons.imagesearch_roller,
                                   color: Colors.brown),
-                              Text('Black'),
+                              Text( "${widget.productModel.color}",),
                               Text('Color')
                             ],
                           ),
                           Column(
                             children: [
                               Icon(Icons.speed_outlined, color: Colors.brown),
-                              Text('59000'),
+                              Text( "${widget.productModel.kms}",),
                               Text('Kms')
                             ],
                           )
@@ -180,7 +180,7 @@ class _DetailspagesState extends State<Detailspages> {
                             children: [
                               Icon(Icons.person_2_outlined,
                                   color: Colors.brown),
-                              Text('2'),
+                              Text( "${widget.productModel.owner}",),
                               Text('Owner')
                             ],
                           ),
@@ -188,14 +188,14 @@ class _DetailspagesState extends State<Detailspages> {
                             children: [
                               Icon(Icons.directions_car_outlined,
                                   color: Colors.brown),
-                              Text('Diesel'),
+                              Text( "${widget.productModel.fuel}",),
                               Text('Fuel')
                             ],
                           ),
                           Column(
                             children: [
                               Icon(Icons.speed_outlined, color: Colors.brown),
-                              Text('__'),
+                              Text( "${widget.productModel.milage}",),
                               Text('Mileage')
                             ],
                           )
@@ -211,7 +211,7 @@ class _DetailspagesState extends State<Detailspages> {
                             children: [
                               Icon(Icons.network_ping_rounded,
                                   color: Colors.brown),
-                              Text('4461'),
+                              Text( "${widget.productModel.engine}",),
                               Text('Engine')
                             ],
                           ),
@@ -219,14 +219,14 @@ class _DetailspagesState extends State<Detailspages> {
                             children: [
                               Icon(Icons.verified_user_outlined,
                                   color: Colors.brown),
-                              Text('25/07/25'),
+                              Text( "${widget.productModel.insure}",),
                               Text('Insurance')
                             ],
                           ),
                           Column(
                             children: [
                               Icon(Icons.ad_units_sharp, color: Colors.brown),
-                              Text('BL6'),
+                              Text( "${widget.productModel.polution}",),
                               Text('Polution')
                             ],
                           ),
