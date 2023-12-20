@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:second_choice_flutter/model/home_model.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'booking_view.dart';
 
-class Details extends StatefulWidget {
-  const Details({Key? key, required Loginmodel }) : super(key: key);
+import '../../controller/controller.dart';
 
+class Detailspages extends StatefulWidget {
+  late Loginmodel productModel;
+  Detailspages({super.key, required this.productModel});
   @override
-  State<Details> createState() => _DetailsState();
+  State<Detailspages> createState() => _DetailspagesState();
 }
 
-class _DetailsState extends State<Details> {
-  bool showCustomBottomNavBar = true; // Set this flag based on your condition
+class _DetailspagesState extends State<Detailspages> {
+
+
+
   void makePhoneCall(String phoneNumber) async {
     String url = 'tel:$phoneNumber';
 
@@ -47,7 +52,7 @@ class _DetailsState extends State<Details> {
                 child: Padding(
                   padding: const EdgeInsets.all(40),
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration:  BoxDecoration(
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 8,
@@ -55,8 +60,8 @@ class _DetailsState extends State<Details> {
                         )
                       ],
                       image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/whitecar.jpg',
+                        image: NetworkImage(
+                          "${widget.productModel.carimage![0]}"
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -65,7 +70,7 @@ class _DetailsState extends State<Details> {
                 ),
               ),
             ),
-            Padding(
+             Padding(
               padding: const EdgeInsets.only(
                   bottom: 13, top: 0, left: 40, right: 40),
               child: Card(
@@ -73,17 +78,17 @@ class _DetailsState extends State<Details> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'Jeep W186X LandSUV',
-                        style: TextStyle(
+                        "${widget.productModel.carname}",
+                        style: const TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: 20,
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -91,7 +96,7 @@ class _DetailsState extends State<Details> {
                             children: [
                               Icon(Icons.calendar_today_rounded,
                                   color: Colors.brown),
-                              Text('2014')
+                              Text("${widget.productModel.modelyear}",)
                             ],
                           ),
                           Row(
@@ -111,7 +116,7 @@ class _DetailsState extends State<Details> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -133,11 +138,11 @@ class _DetailsState extends State<Details> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(13.0),
+                      padding: EdgeInsets.all(13.0),
                       child: Divider(),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(13.0),
+                      padding: EdgeInsets.all(13.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -167,7 +172,7 @@ class _DetailsState extends State<Details> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(13.0),
+                      padding: EdgeInsets.all(13.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -198,7 +203,7 @@ class _DetailsState extends State<Details> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(13.0),
+                      padding: EdgeInsets.all(13.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -229,7 +234,7 @@ class _DetailsState extends State<Details> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: EdgeInsets.all(15.0),
                       child: Divider(),
                     )
                     // ... Other Card contents
@@ -243,12 +248,12 @@ class _DetailsState extends State<Details> {
               child: Card(
                 color: Colors.grey[350],
                 margin:
-                EdgeInsets.only(left: 40, top: 30, bottom: 30, right: 40),
+                const EdgeInsets.only(left: 40, top: 30, bottom: 30, right: 40),
                 child: Padding(
                   padding: EdgeInsets.all(2.0),
                   child: GridView.builder(
                     itemCount: 15,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       crossAxisSpacing: 4.0,
                       mainAxisSpacing: 4.0,
@@ -259,7 +264,7 @@ class _DetailsState extends State<Details> {
                         child: Center(
                           child: Text(
                             'Item $index',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18.0,
                             ),
@@ -305,7 +310,7 @@ class _DetailsState extends State<Details> {
                 backgroundColor: MaterialStateProperty.all(Colors.grey[600]),
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Book(),));
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => Book(),));
               },
               child: Text('Book Now'),
             ),
@@ -318,8 +323,8 @@ class _DetailsState extends State<Details> {
 class MyTabbedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20,right: 35,top: 15,left: 35),
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 20,right: 35,top: 15,left: 35),
       child: Card(color: Colors.white,
         child: DefaultTabController(
           length: 3, // Number of tabs
@@ -348,32 +353,32 @@ class MyTabbedCard extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(6.0),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Text('Central locking'),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(6.0),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Text('Driver air Bag'),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(6.0),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Text('Anti Lock Barking System'),
                                     ), Padding(
-                                      padding: const EdgeInsets.all(6.0),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Text('Power door lock'),
                                     ), Padding(
-                                      padding: const EdgeInsets.all(6.0),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Text('Adjustable seats'),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(6.0),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Text('Driver air Bag'),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(6.0),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Text('Crash sensor'),
                                     ), Padding(
-                                      padding: const EdgeInsets.all(6.0),
+                                      padding: EdgeInsets.all(6.0),
                                       child: Text('Air Conditioner'),
                                     ),
                                   ],

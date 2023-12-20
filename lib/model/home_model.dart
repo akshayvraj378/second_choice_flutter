@@ -1,51 +1,64 @@
-// class Carddetails {
-//
-//   late String? carimage;
-//   late String? carname;
-//
-//   Carddetails({ required this.carimage, required this.carname});
-//   //convert json data to dart objects
-//   factory Carddetails.fromJson(Map<String, dynamic> json) {
-//     return Carddetails(
-//
-//         carimage: json['carname'],
-//         carname: json['carimage']);
-//   }
-//   //convert dart object to Json data
-//   Map<String, dynamic> toJson() {
-//     return {
-//
-//       'carimage': carimage,
-//       'carname': carname
-//     };
-//   }
-// }
+class Loginmodel{
+  late  List? carimage;
+  late  String? carname;
+  late String? modelyear;
+  late String? kms;
+  late String? fuel;
+  late String? prize;
+  late String? color;
+  late String? owner;
+  late String? milage;
+  late String? engine;
+  late String? insure;
+  late String? polution;
 
 
-// model.dart
+  Loginmodel({
+      this.carimage,
+      this.carname,
+      this.modelyear,
+      this.kms,
+      this.fuel,
+      this.prize,
+      this.color,
+      this.owner,
+      this.milage,
+      this.engine,
+      this.insure,
+      this.polution});
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+  factory Loginmodel.fromJson(Map<String, dynamic> json) {
+    return Loginmodel(
+        carimage: json['carimage'],
+        carname: json['carname'],
+        modelyear: json['modelyear'],
+        kms: json['kms'],
+        fuel: json['fuel'],
+        prize: json['prize'],
+        color: json['color'],
+        owner: json['owner'],
+        milage: json['milage'],
+        engine: json['engine'],
+        polution: json['polution']
 
-class Item {
-  final String title;
-  final String description;
-
-  Item({
-    required this.title,
-    required this.description,
-  });
-
-  factory Item.fromMap(Map<String, dynamic> map) {
-    return Item(
-      title: map['title'] ?? '',
-      description: map['description'] ?? '',
     );
   }
   Map<String, dynamic> toJson() {
     return {
+      'carimage': carimage,
+      'carname': carname,
+      'modelyear': modelyear,
+      'kms': kms,
+      'fuel': fuel,
+      'prize': prize,
+      'color':color,
+      'owner':owner,
+      'milage':milage,
+      'engine':engine,
+      'insure':insure,
+      'polution':polution
 
-      'title': title,
-      'description': description
     };
   }
+
 }

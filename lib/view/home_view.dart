@@ -43,9 +43,9 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(context,  MaterialPageRoute(builder: (context) {
-                  return Details();
-                },));
+                // Navigator.push(context,  MaterialPageRoute(builder: (context) {
+                //   return Details();
+                // },));
               },
               child: Card(
                 color: Colors.lightBlue[50],
