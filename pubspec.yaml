@@ -45,6 +45,11 @@ dependencies:
   get: ^4.6.6
   cached_network_image: ^3.3.0
   carousel_slider: ^4.2.1
+  google_sign_in: ^6.1.6
+  pinput: ^3.0.1
+  firebase_auth: ^4.15.3
+  flutter_easyloading: ^3.0.5
+  firebase_messaging: ^14.7.9
 
 dev_dependencies:
   flutter_test:

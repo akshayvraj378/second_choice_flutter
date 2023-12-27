@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:second_choice_flutter/view/details_view.dart';
 
-import '../../controller/controller.dart';
+import '../../controller/home_controller.dart';
 import '../../model/home_model.dart';
 import '../../view/home_view.dart';
 import '../custamized_widgets/drawer.dart';
 import 'cardetailspage.dart';
-import 'deatilspage.dart';
 
 class Caritems extends StatefulWidget {
   const Caritems({super.key});
