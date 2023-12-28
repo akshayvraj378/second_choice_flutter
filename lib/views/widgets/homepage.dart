@@ -55,23 +55,27 @@ class _CaritemsState extends State<Caritems> {
                     itemCount: dataLength,
                     itemBuilder: (context, index) {
                       Loginmodel productModel = Loginmodel(
-                        carimage: data[index]['carimage'],
-                        carname: data[index]['carname'],
-                        modelyear: data[index]['modelyear'],
-                        kms: data[index]['kms'],
-                        fuel: data[index]['fuel'],
-                        prize: data[index]['prize'],
-                        color: data[index]['color'],
-                        owner: data[index]['owner'],
-                        milage: data[index]['milage'],
-                        engine: data[index]['engine'],
-                        insure: data[index]['insure'],
-                        polution: data[index]['polution'],
-                      );
+                          productId: data[index]['productId'],
+                          carimage: data[index]['carimage'],
+                          carname: data[index]['carname'],
+                          modelyear: data[index]['modelyear'],
+                          kms: data[index]['kms'],
+                          fuel: data[index]['fuel'],
+                          prize: data[index]['prize'],
+                          color: data[index]['color'],
+                          owner: data[index]['owner'],
+                          milage: data[index]['milage'],
+                          engine: data[index]['engine'],
+                          insure: data[index]['insure'],
+                          polution: data[index]['polution'],
+                          features: data[index]['features'],
+                          specification: data[index]['specification'],
+                          overview: data[index]['overview']);
                       return GestureDetector(
                         onTap: () {
-
-                              Get.to(()=>Detailspages(productModel: productModel));                        },
+                          Get.to(
+                              () => Detailspages(productModel: productModel));
+                        },
                         child: Card(
                           color: Colors.lightBlue[50],
                           elevation: 8,

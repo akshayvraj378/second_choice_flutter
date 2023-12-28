@@ -1,4 +1,4 @@
-class Loginmodel {
+class CartModel {
   late String? productId;
   late List? carimage;
   late String? carname;
@@ -17,9 +17,9 @@ class Loginmodel {
   late List? specification;
   late List? overview;
 
-  Loginmodel(
+  CartModel(
       {this.productId,
-        this.carimage,
+      this.carimage,
       this.carname,
       this.modelyear,
       this.kms,
@@ -35,8 +35,8 @@ class Loginmodel {
       this.specification,
       this.overview});
 
-  factory Loginmodel.fromJson(Map<String, dynamic> json) {
-    return Loginmodel(
+  factory CartModel.fromJson(Map<String, dynamic> json) {
+    return CartModel(
         productId: json['productId'],
         carimage: json['carimage'],
         carname: json['carname'],
@@ -53,9 +53,9 @@ class Loginmodel {
         specification: json['specification'],
         overview: json['overview']);
   }
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
-      'productId':productId,
+      'productId': productId,
       'carimage': carimage,
       'carname': carname,
       'modelyear': modelyear,

@@ -3,7 +3,7 @@
 
 
     <application
-        android:label="second_choice_flutter"
+        android:label="Second Choice"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

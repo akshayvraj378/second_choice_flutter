@@ -37,7 +37,7 @@ class _LoginPageUIchatState extends State<LoginPageUIchat> {
                       children: [
                         const SizedBox(
                           child: Image(
-                              image: AssetImage('assets/images/logoe.jpg')),
+                              image: AssetImage('assets/images/img16.jpg')),
                         ),
                         Container(
                           height: 650,

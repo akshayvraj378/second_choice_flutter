@@ -1,7 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+
 class NavigationBars extends StatefulWidget {
-  const NavigationBars({super.key});
+
+  NavigationBars({super.key,});
 
   @override
   State<NavigationBars> createState() => _NavigationBarsState();
@@ -20,7 +24,7 @@ class _NavigationBarsState extends State<NavigationBars> {
 
   @override
   Widget build(BuildContext context) {
-    return  NavigationBar(
+    return NavigationBar(
       height: 70,
       backgroundColor: Colors.black,
       destinations: [
@@ -48,7 +52,7 @@ class _NavigationBarsState extends State<NavigationBars> {
               backgroundColor: MaterialStateProperty.all(Colors.grey[600]),
             ),
             onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => Book(),));
+
             },
             child: Text('Book Now'),
           ),
