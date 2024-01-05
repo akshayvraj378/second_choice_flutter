@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
-import '../views/widgets/loginpage.dart';
+import '../views/widgets/login_page.dart';
 import 'login_view.dart';
 
 
@@ -216,7 +216,7 @@ class _NewState extends State<New> {
                                             Navigator.pushAndRemoveUntil(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) => const LoginPageUIchat(),
+                                                  builder: (context) => const LoginPage(),
                                                 ),
                                                     (route) => false);
                                           },

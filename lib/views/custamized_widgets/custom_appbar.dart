@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/favourite_page.dart';
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
 
@@ -13,6 +15,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      actions: [
+IconButton(onPressed: () {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return View_favourites();
+  },));
+}, icon: Icon(Icons.favorite_sharp))      ],
       leading: Builder(
         builder: (context) => IconButton(
           onPressed: () {
@@ -42,6 +50,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
+      
     );
   }
 

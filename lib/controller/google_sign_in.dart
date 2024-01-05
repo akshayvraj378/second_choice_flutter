@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../model/user_model.dart';
-import '../views/widgets/homepage.dart';
-import 'get_divice_token_controller.dart';
+import '../views/widgets/home_page.dart';
+import 'get_device_token_controller.dart';
 
 
 class GoogleSignInController extends GetxController {
@@ -57,7 +57,7 @@ class GoogleSignInController extends GetxController {
               .collection('users')
               .doc(user.uid)
               .set(userModel.toMap());
-          Get.offAll(() => const Caritems());
+          Get.offAll(() => const ProductList());
         }
       }
     } catch (e) {

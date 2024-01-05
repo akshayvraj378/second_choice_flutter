@@ -2,7 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:second_choice_flutter/views/widgets/loginpage.dart';
+import 'package:second_choice_flutter/views/widgets/login_page.dart';
+
 
 
 void main() async {
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return GetMaterialApp(
-      home: const LoginPageUIchat(),
+    return  const GetMaterialApp(
+      home: LoginPage()
 
     );
   }

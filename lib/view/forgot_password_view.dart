@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../views/widgets/loginpage.dart';
+import '../views/widgets/login_page.dart';
 import 'login_view.dart';
 
 
@@ -75,7 +75,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginPageUIchat(),
+                              builder: (context) => LoginPage(),
                             ),
                                 (route) => false);
                       },

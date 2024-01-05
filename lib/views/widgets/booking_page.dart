@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../model/home_model.dart';
+import '../../model/product_model.dart';
 
 class Book extends StatefulWidget {
-  Loginmodel productModel;
+  ProductModel productModel;
 
   Book(
       {super.key,

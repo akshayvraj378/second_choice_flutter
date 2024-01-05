@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:second_choice_flutter/model/home_model.dart';
+// import 'package:second_choice_flutter/model/product_model.dart';
 // import 'package:url_launcher/url_launcher.dart';
 // import 'booking_view.dart';
 //

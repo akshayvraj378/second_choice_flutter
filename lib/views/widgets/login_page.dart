@@ -3,16 +3,16 @@ import 'package:second_choice_flutter/controller/google_sign_in.dart';
 import 'package:second_choice_flutter/view/registration_view.dart';
 
 import '../../view/forgot_password_view.dart';
-import '../../view/home_view.dart';
+import 'home_page.dart';
 
-class LoginPageUIchat extends StatefulWidget {
-  const LoginPageUIchat({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPageUIchat> createState() => _LoginPageUIchatState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageUIchatState extends State<LoginPageUIchat> {
+class _LoginPageState extends State<LoginPage> {
   final loginKey = GlobalKey<FormState>();
   bool obscurePassword = true;
   var passwordController = TextEditingController();
@@ -223,7 +223,7 @@ class _LoginPageUIchatState extends State<LoginPageUIchat> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    HomePage(),
+                                                    ProductList(),
                                               ));
                                         }
                                       },
@@ -257,7 +257,7 @@ class _LoginPageUIchatState extends State<LoginPageUIchat> {
                               IconButton(onPressed: () {
                                 setState(() {
                                   googleSignInController.signInWithGoogle();                                });
-                              }, icon: Icon(Icons.interpreter_mode_sharp))
+                              }, icon: Image(image: AssetImage('assets/images/google.jpg')))
 
                             ],
                           ),

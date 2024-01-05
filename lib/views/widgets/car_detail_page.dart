@@ -2,23 +2,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:second_choice_flutter/model/home_model.dart';
-import 'package:second_choice_flutter/views/cart-page/cart-page.dart';
+import 'package:second_choice_flutter/model/product_model.dart';
 import 'package:second_choice_flutter/views/widgets/booking_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../controller/cart-controller.dart';
-import '../custamized_widgets/navigationbar_Details_page.dart';
+import '../../controller/cart_controller.dart';
 
-class Detailspages extends StatefulWidget {
-  Loginmodel productModel;
 
-  Detailspages({super.key, required this.productModel});
+class ProductDetails extends StatefulWidget {
+  ProductModel productModel;
+
+  ProductDetails({super.key, required this.productModel});
 
   @override
-  State<Detailspages> createState() => _DetailspagesState();
+  State<ProductDetails> createState() => _ProductDetailsState();
 }
 
-class _DetailspagesState extends State<Detailspages> {
+class _ProductDetailsState extends State<ProductDetails> {
   User? user = FirebaseAuth.instance.currentUser;
   final CartItemController _CartItemController = Get.put(CartItemController());
   void makePhoneCall(String phoneNumber) async {
@@ -393,13 +392,16 @@ class _DetailspagesState extends State<Detailspages> {
                   backgroundColor: MaterialStateProperty.all(Colors.grey[600]),
                 ),
                 onPressed: () async {
-                  await _CartItemController
-                      .checkProductExistence(
-                      uId: user!.uid,
-                      productModel: widget.productModel);
+                  // await _CartItemController
+                  //     .checkProductExistence(
+                  //     uId: user!.uid,
+                  //     productModel: widget.productModel);
                  //
+
+                  Get.to(
+                          () => Book(productModel: widget.productModel));
                 },
-                child: const Text('Add to cart'),
+                child: const Text('Book Now'),
               ),
             ),
           ],

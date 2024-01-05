@@ -1,24 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:second_choice_flutter/view/details_view.dart';
+import 'package:second_choice_flutter/controller/product_controller.dart';
 
-import '../../controller/home_controller.dart';
-import '../../model/home_model.dart';
-import '../../view/home_view.dart';
-import '../custamized_widgets/drawer.dart';
-import 'cardetailspage.dart';
+import '../../controller/cart_controller.dart';
+import '../../model/product_model.dart';
+import '../custamized_widgets/custom_appbar.dart';
+import '../custamized_widgets/custom_drawer.dart';
+import 'car_detail_page.dart';
 
-class Caritems extends StatefulWidget {
-  const Caritems({super.key});
+class ProductList extends StatefulWidget {
+  const ProductList({super.key});
 
   @override
-  State<Caritems> createState() => _CaritemsState();
+  State<ProductList> createState() => _ProductListState();
 }
 
-class _CaritemsState extends State<Caritems> {
-  final Logincontrol _logincontrol = Get.put(Logincontrol());
+class _ProductListState extends State<ProductList> {
+  bool isFavorite = false;
+  User? user = FirebaseAuth.instance.currentUser;
+  List<bool> isFavoriteList = []; // List to track favorite status of each item
+  final CartItemController _CartItemController = Get.put(CartItemController());
+
+  final ProductController _productController = Get.put(ProductController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -35,7 +41,7 @@ class _CaritemsState extends State<Caritems> {
         children: [
           Expanded(
             child: FutureBuilder<List<QueryDocumentSnapshot<Object?>>>(
-              future: _logincontrol.getCarinformationData(),
+              future: _productController.getCarinformationData(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   // Return a loading indicator or placeholder widget
@@ -54,7 +60,7 @@ class _CaritemsState extends State<Caritems> {
                     shrinkWrap: true,
                     itemCount: dataLength,
                     itemBuilder: (context, index) {
-                      Loginmodel productModel = Loginmodel(
+                      ProductModel productModel = ProductModel(
                           productId: data[index]['productId'],
                           carimage: data[index]['carimage'],
                           carname: data[index]['carname'],
@@ -71,10 +77,14 @@ class _CaritemsState extends State<Caritems> {
                           features: data[index]['features'],
                           specification: data[index]['specification'],
                           overview: data[index]['overview']);
+                      // Initialize isFavoriteList with false for each item initially
+                      if (isFavoriteList.length <= index) {
+                        isFavoriteList.add(false);
+                      }
                       return GestureDetector(
                         onTap: () {
                           Get.to(
-                              () => Detailspages(productModel: productModel));
+                              () => ProductDetails(productModel: productModel));
                         },
                         child: Card(
                           color: Colors.lightBlue[50],
@@ -91,6 +101,7 @@ class _CaritemsState extends State<Caritems> {
                                     top: Radius.circular(10)),
                                 child: SizedBox(
                                   height: 200,
+                                  width: double.infinity,
                                   child: Image.network(
                                     "${productModel.carimage![0]}",
                                     fit: BoxFit.cover,
@@ -166,6 +177,67 @@ class _CaritemsState extends State<Caritems> {
                                         )
                                       ],
                                     ),
+                                    IconButton(
+                                      onPressed: () async {
+                                        bool isFavorite = isFavoriteList[index]; // Check if item is already favorited
+
+                                        String uId = user!.uid; // Define the uId variable
+
+                                        if (isFavorite) {
+                                          // If the item is already favorited, delete it
+                                          await FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(uId)
+                                              .collection('cartOrders')
+                                              .doc(productModel.productId.toString()) // Provide the document ID to be deleted
+                                              .delete();
+
+                                          setState(() {
+                                            isFavoriteList[index] = false;
+                                          });
+                                        } else {
+                                          // If the item is not favorited, add it to the favorites
+                                          await FirebaseFirestore.instance
+                                              .collection('cart')
+                                              .doc(uId)
+                                              .collection('cartOrders')
+                                              .doc(productModel.productId.toString()) // Provide the document ID to be added
+                                              .set({
+                                            // Here, you can set data for the favorite item if needed
+                                            // For example:
+                                            'productId': productModel.productId,
+                                            'carimage': productModel.carimage,
+                                            'carname': productModel.carname,
+                                            'modelyear': productModel.modelyear,
+                                            'kms': productModel.kms,
+                                            'fuel': productModel.fuel,
+                                            'prize': productModel.prize,
+                                            'color': productModel.color,
+                                            'owner': productModel.owner,
+                                            'milage': productModel.milage,
+                                            'engine': productModel.engine,
+                                            'insure': productModel.insure,
+                                            'polution': productModel.polution,
+                                            'features': productModel.features,
+                                            'specification': productModel.specification,
+                                            'overview': productModel.overview
+                                            // Add other properties as needed
+                                          });
+
+                                          setState(() {
+                                            isFavoriteList[index] = true;
+                                          });
+                                        }
+                                      },
+                                      icon: Icon(
+                                        isFavoriteList[index] ? Icons.favorite : Icons.favorite_border,
+                                        color: isFavoriteList[index] ? Colors.red : null,
+                                        size: 30,
+                                      ),
+                                    ),
+
+
+
                                   ],
                                 ),
                               )
