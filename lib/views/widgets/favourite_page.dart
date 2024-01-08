@@ -61,12 +61,12 @@ class _View_favouritesState extends State<View_favourites> {
                         .collection('cartOrders')
                         .get(),
                     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      } else {
-                        if (snapshot.hasData) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                      //   return Center(child: CircularProgressIndicator());
+                      // } else if (snapshot.hasError) {
+                      //   return Center(child: Text('Error: ${snapshot.error}'));
+                      // } else {
+                      //   if (snapshot.hasData) {
                           List<DocumentSnapshot> documents = snapshot.data!.docs;
 
                           return Column(
@@ -201,12 +201,12 @@ class _View_favouritesState extends State<View_favourites> {
                           return Center(child: Text('No data found for $cartDocumentID'));
                         }
                       }
-                    },
+
                   );
                 },
               );
             } else {
-              return Center(child: Text('No favorite items found.'));
+              return Center(child: Text('No favorite items found.',style: TextStyle(color: Colors.white),));
             }
           }
         },

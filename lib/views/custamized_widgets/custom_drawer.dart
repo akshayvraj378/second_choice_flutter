@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:second_choice_flutter/views/widgets/profile_view.dart';
+
+import '../../controller/getuserdata.dart';
+import '../../controller/google_sign_in.dart';
+import '../widgets/settings_view.dart';
 
 class CustomDrawer extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -11,11 +17,11 @@ class CustomDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.indigo[100],
             ),
-            child: const Column(
+            child:  Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Danial Disooza',
+                  'dezooza',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -42,7 +48,7 @@ class CustomDrawer extends StatelessWidget {
             iconColor: Colors.brown[100],
             title: 'Settings',
             onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => Seti(),));
+               Navigator.push(context, MaterialPageRoute(builder: (context) => Seti(),));
             },
           ),
           buildListTile(
@@ -50,7 +56,7 @@ class CustomDrawer extends StatelessWidget {
             iconColor: Colors.blueAccent[100],
             title: 'Profile',
             onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => Seti(),));
+               Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(),));
             },
           ),
           buildListTile(

@@ -73,8 +73,8 @@ class _BookState extends State<Book> {
                           child: Image.network(
                               "${widget.productModel.carimage![0]}")),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
+                    const Padding(
+                      padding: EdgeInsets.only(
                           left: 35, top: 1, bottom: 1, right: 1),
                       child: Text(
                         'summary',
@@ -95,7 +95,7 @@ class _BookState extends State<Book> {
                               child: Column(children: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text('Mercedes Benz CLA Class',
+                                  child: Text("${widget.productModel.carname}",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w800,
                                           fontSize: 20)),
@@ -107,7 +107,7 @@ class _BookState extends State<Book> {
                                     children: [
                                       Icon(Icons.currency_rupee),
                                       Text(
-                                        '71,00,000',
+                                        "${widget.productModel.prize}",
                                       )
                                     ],
                                   ),
@@ -125,7 +125,7 @@ class _BookState extends State<Book> {
                                     children: [
                                       Text('Total'),
                                       Text(
-                                        '71,00,000',
+                                        "${widget.productModel.prize}",
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600),
@@ -372,7 +372,7 @@ class _BookState extends State<Book> {
                                   // Perform actions with validated data here
                                 }
                               },
-                              child: Text('add to cart'
+                              child: Text('Proceed'
                                   )),
                         ],
                       ),
