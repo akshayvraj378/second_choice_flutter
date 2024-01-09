@@ -1,20 +1,71 @@
-
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../model/product_model.dart';
 
 class Book extends StatefulWidget {
   ProductModel productModel;
 
-  Book(
-      {super.key,
-      required this.productModel});
+  Book({super.key, required this.productModel});
 
   @override
   State<Book> createState() => _BookState();
 }
 
 class _BookState extends State<Book> {
+  File? _adharImage;
+  File? _panImage;
+  final picker = ImagePicker();
+
+  Future getImage(ImageSource source, String type) async {
+    final pickedFile = await picker.pickImage(source: source);
+
+    setState(() {
+      if (pickedFile != null) {
+        if (type == 'adhar') {
+          _adharImage = File(pickedFile.path);
+        } else if (type == 'pan') {
+          _panImage = File(pickedFile.path);
+        }
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future<void> _showSelectionDialog(String type) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Select Image Source'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  child: Text('Camera'),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    getImage(ImageSource.camera, type);
+                  },
+                ),
+                SizedBox(height: 16),
+                GestureDetector(
+                  child: Text('Gallery'),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    getImage(ImageSource.gallery, type);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   String Dist = 'District';
 
   // List of items in our dropdown menu
@@ -313,18 +364,20 @@ class _BookState extends State<Book> {
                                 Text('Upload your Adharcard',
                                     style: TextStyle(color: Colors.white)),
                                 SizedBox(
-                                  width: 170,
-                                  height: 160,
-                                  child: InkWell(
-                                    onTap: () {
-
-                                    },
+                                    width: 170,
+                                    height: 160,
                                     child: Card(
-                                      color: Colors.white24,
-                                      child: Icon(Icons.image),
-                                    ),
-                                  ),
-                                )
+                                      color: Colors.white30,
+                                      child: _adharImage == null
+                                          ? Center(
+                                              child: IconButton(
+                                                  onPressed: () =>
+                                                      _showSelectionDialog(
+                                                          'adhar'),
+                                                  icon: Icon(Icons.camera_alt)))
+                                          : Image.file(_adharImage!,
+                                              fit: BoxFit.cover),
+                                    )),
                               ],
                             ),
                             Column(
@@ -332,16 +385,20 @@ class _BookState extends State<Book> {
                                 const Text('Upload your PAN Card',
                                     style: TextStyle(color: Colors.white)),
                                 SizedBox(
-                                  width: 170,
-                                  height: 160,
-                                  child: InkWell(
-                                    onTap: () {},
+                                    width: 170,
+                                    height: 160,
                                     child: Card(
-                                      color: Colors.white24,
-                                      child: Icon(Icons.image),
-                                    ),
-                                  ),
-                                )
+                                      color: Colors.white30,
+                                      child: _panImage == null
+                                          ? Center(
+                                              child: IconButton(
+                                                  onPressed: () =>
+                                                      _showSelectionDialog(
+                                                          'pan'),
+                                                  icon: Icon(Icons.camera_alt)))
+                                          : Image.file(_panImage!,
+                                              fit: BoxFit.cover),
+                                    )),
                               ],
                             )
                           ],
@@ -361,8 +418,6 @@ class _BookState extends State<Book> {
                                       MaterialStatePropertyAll(Size(190, 50))),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  // Form is valid, perform necessary actions
-                                  // Access field values using controllers:
                                   String name = _nameController.text;
                                   String address = _addressController.text;
                                   String pincode = _pincodeController.text;
@@ -371,15 +426,12 @@ class _BookState extends State<Book> {
                                       _aadhaarController.text;
                                   String advanceAmount =
                                       _advanceAmountController.text;
-
-                                  // Perform actions with validated data here
                                 }
                               },
-                              child: Text('Proceed'
-                                  )),
+                              child: Text('Proceed')),
                         ],
                       ),
-                    )
+                    ),
                   ]),
             )),
       ),

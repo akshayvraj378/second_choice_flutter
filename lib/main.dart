@@ -8,7 +8,7 @@ import 'package:second_choice_flutter/views/widgets/home_page.dart';
 import 'package:second_choice_flutter/views/widgets/login_page.dart';
 import 'package:second_choice_flutter/views/widgets/registration_view.dart';
 
-
+import 'controller/email_validation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,9 +26,8 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return   GetMaterialApp(
-      home: ProductList()
-
+    return GetMaterialApp(
+        home: Register()
     );
   }
 }

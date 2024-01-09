@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:second_choice_flutter/controller/google_sign_in.dart';
 
 import '../../controller/getuserdata.dart';
-import '../../view/settings_view.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -45,10 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
         body: FutureBuilder(
           future: _getUserData(), builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-          //   return CircularProgressIndicator();
-          // } else if (snapshot.hasError) {
-          //   return Text('error');
-          // } else {
+
             List<QueryDocumentSnapshot<Object?>> data = snapshot.data!;
             return Stack(children: [
               ClipRRect(
