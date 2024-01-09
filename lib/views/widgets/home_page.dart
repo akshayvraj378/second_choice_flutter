@@ -45,14 +45,14 @@ class _ProductListState extends State<ProductList> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   // Return a loading indicator or placeholder widget
-                //   return const SizedBox(
-                //       width: 20,
-                //       height: 20,
-                //       child: Center(child: CircularProgressIndicator()));
-                // } else if (snapshot.hasError) {
-                //   // Handle error
-                //   return Text('Error: ${snapshot.error}');
-                // } else {
+                  //   return const SizedBox(
+                  //       width: 20,
+                  //       height: 20,
+                  //       child: Center(child: CircularProgressIndicator()));
+                  // } else if (snapshot.hasError) {
+                  //   // Handle error
+                  //   return Text('Error: ${snapshot.error}');
+                  // } else {
                   // Data has been loaded successfully
                   List<QueryDocumentSnapshot<Object?>> data = snapshot.data!;
                   int dataLength = data.length;
@@ -179,9 +179,12 @@ class _ProductListState extends State<ProductList> {
                                     ),
                                     IconButton(
                                       onPressed: () async {
-                                        bool isFavorite = isFavoriteList[index]; // Check if item is already favorited
+                                        bool isFavorite = isFavoriteList[
+                                            index]; // Check if item is already favorited
 
-                                        String uId = user!.uid; // Define the uId variable
+                                        String uId = user!
+                                            .uid;
+                                        // Define the uId variable
 
                                         if (isFavorite) {
                                           // If the item is already favorited, delete it
@@ -189,7 +192,8 @@ class _ProductListState extends State<ProductList> {
                                               .collection('cart')
                                               .doc(uId)
                                               .collection('cartOrders')
-                                              .doc(productModel.productId.toString()) // Provide the document ID to be deleted
+                                              .doc(productModel.productId
+                                                  .toString()) // Provide the document ID to be deleted
                                               .delete();
 
                                           setState(() {
@@ -201,7 +205,8 @@ class _ProductListState extends State<ProductList> {
                                               .collection('cart')
                                               .doc(uId)
                                               .collection('cartOrders')
-                                              .doc(productModel.productId.toString()) // Provide the document ID to be added
+                                              .doc(productModel.productId
+                                                  .toString()) // Provide the document ID to be added
                                               .set({
                                             // Here, you can set data for the favorite item if needed
                                             // For example:
@@ -219,7 +224,8 @@ class _ProductListState extends State<ProductList> {
                                             'insure': productModel.insure,
                                             'polution': productModel.polution,
                                             'features': productModel.features,
-                                            'specification': productModel.specification,
+                                            'specification':
+                                                productModel.specification,
                                             'overview': productModel.overview
                                             // Add other properties as needed
                                           });
@@ -230,14 +236,15 @@ class _ProductListState extends State<ProductList> {
                                         }
                                       },
                                       icon: Icon(
-                                        isFavoriteList[index] ? Icons.favorite : Icons.favorite_border,
-                                        color: isFavoriteList[index] ? Colors.red : null,
+                                        isFavoriteList[index]
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        color: isFavoriteList[index]
+                                            ? Colors.red
+                                            : null,
                                         size: 30,
                                       ),
                                     ),
-
-
-
                                   ],
                                 ),
                               )

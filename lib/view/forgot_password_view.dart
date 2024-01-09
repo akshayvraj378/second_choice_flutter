@@ -75,7 +75,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginPage(),
+                              builder: (context) => Login(),
                             ),
                                 (route) => false);
                       },

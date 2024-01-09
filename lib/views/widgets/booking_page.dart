@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import '../../model/product_model.dart';
@@ -315,7 +316,9 @@ class _BookState extends State<Book> {
                                   width: 170,
                                   height: 160,
                                   child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+
+                                    },
                                     child: Card(
                                       color: Colors.white24,
                                       child: Icon(Icons.image),
@@ -326,7 +329,7 @@ class _BookState extends State<Book> {
                             ),
                             Column(
                               children: [
-                                Text('Upload your PAN Card',
+                                const Text('Upload your PAN Card',
                                     style: TextStyle(color: Colors.white)),
                                 SizedBox(
                                   width: 170,
@@ -351,7 +354,7 @@ class _BookState extends State<Book> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
-                              style: ButtonStyle(
+                              style: const ButtonStyle(
                                   backgroundColor:
                                       MaterialStatePropertyAll(Colors.brown),
                                   fixedSize:
