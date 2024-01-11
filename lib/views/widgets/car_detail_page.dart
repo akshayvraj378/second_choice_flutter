@@ -5,8 +5,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:second_choice_flutter/model/product_model.dart';
 import 'package:second_choice_flutter/views/widgets/booking_page.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_share/whatsapp_share.dart';
 import '../../controller/cart_controller.dart';
-
 
 class ProductDetails extends StatefulWidget {
   ProductModel productModel;
@@ -18,8 +18,10 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+
   User? user = FirebaseAuth.instance.currentUser;
   final CartItemController _CartItemController = Get.put(CartItemController());
+
   void makePhoneCall(String phoneNumber) async {
     String url = 'tel:$phoneNumber';
 
@@ -36,9 +38,12 @@ class _ProductDetailsState extends State<ProductDetails> {
         backgroundColor: Colors.black87,
         appBar: AppBar(
             actions: [
+
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.favorite_border)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.share))
+                  onPressed: ()  {
+
+                  },
+                  icon: const Icon(Icons.share))
             ],
             backgroundColor: Colors.black,
             foregroundColor: Colors.white,
@@ -291,9 +296,41 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         return GridTile(
-                            child: Image.network(
-                          "${widget.productModel.carimage![index]}",
-                          fit: BoxFit.cover,
+                            child: GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => Dialog(
+                                child: Card(
+                                  color: Colors.white10,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    height: 300,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          "${widget.productModel.carname}",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        SizedBox(
+                                          child: Image.network(
+                                            "${widget.productModel.carimage![index]}",
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          child: Image.network(
+                            "${widget.productModel.carimage![index]}",
+                            fit: BoxFit.cover,
+                          ),
                         ));
                       },
                     ),
@@ -396,10 +433,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                   //     .checkProductExistence(
                   //     uId: user!.uid,
                   //     productModel: widget.productModel);
-                 //
+                  //
 
-                  Get.to(
-                          () => Book(productModel: widget.productModel));
+                  Get.to(() => Book(productModel: widget.productModel));
                 },
                 child: const Text('Book Now'),
               ),

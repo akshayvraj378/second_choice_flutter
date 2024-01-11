@@ -2,13 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:second_choice_flutter/views/widgets/camara.dart';
-import 'package:second_choice_flutter/views/widgets/fav_page';
-import 'package:second_choice_flutter/views/widgets/home_page.dart';
-import 'package:second_choice_flutter/views/widgets/login_page.dart';
-import 'package:second_choice_flutter/views/widgets/registration_view.dart';
+import 'package:second_choice_flutter/views/widgets/splashscreen.dart';
+import 'package:second_choice_flutter/views/widgets/wellcome_page.dart';
 
-import 'controller/email_validation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +22,8 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return GetMaterialApp(
-        home: Register()
+    return const GetMaterialApp(
+        home: SplashScreen()
     );
   }
 }

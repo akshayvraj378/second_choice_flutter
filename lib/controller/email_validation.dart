@@ -1,14 +1,229 @@
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:flutter/material.dart';
+//
+// import 'package:get/get.dart';
+//
+// import '../views/widgets/home_page.dart';
+// import 'email_validation_controller.dart';
+//
+// class EmailValidationScreen extends StatefulWidget {
+//   final User user;
+//
+//   const EmailValidationScreen({super.key, required this.user});
+//
+//   @override
+//   State<EmailValidationScreen> createState() => _EmailValidationScreenState();
+// }
+//
+// class _EmailValidationScreenState extends State<EmailValidationScreen> {
+//   bool _isSendingVerification = false;
+//   bool _isSigningOut = false;
+//   final EmailValidationController _emailValidationController =
+//       Get.put(EmailValidationController());
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SafeArea(
+//       child: Scaffold(
+//         body: SizedBox(
+//           width: Get.width,
+//           height: Get.height,
+//           child: Column(children: [
+//             const SizedBox(
+//               height: 10,
+//             ),
+//             const Center(
+//               child: Text(
+//                 'Verify your email address',
+//                 style: TextStyle(),
+//               ),
+//             ),
+//             const SizedBox(
+//               height: 10,
+//             ),
+//             Center(
+//               child: Container(
+//                 padding:
+//                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+//                 decoration: BoxDecoration(
+//                   border: Border.all(
+//                     color: Colors.grey,
+//                     width: 1.0,
+//                   ),
+//                 ),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     const SizedBox(
+//                       height: 10,
+//                     ),
+//                     Text(
+//                       'Name: ${widget.user.displayName}',
+//                       style: const TextStyle(
+//                         fontSize: 14,
+//                         fontWeight: FontWeight.w400,
+//                       ),
+//                     ),
+//                     const SizedBox(
+//                       height: 5,
+//                     ),
+//                     Text(
+//                       'Email: ${widget.user.email}',
+//                       style: const TextStyle(
+//                         fontSize: 14,
+//                         fontFamily: 'Roboto-Regular',
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//             const SizedBox(
+//               height: 30,
+//             ),
+//             widget.user.emailVerified
+//                 ? const Center(
+//                     child: Text(
+//                       'Email is verified',
+//                       style: TextStyle(
+//                         fontSize: 14,
+//                         fontFamily: 'Roboto-Regular',
+//                         color: Colors.lightGreenAccent,
+//                       ),
+//                     ),
+//                   )
+//                 : const Center(
+//                     child: Text(
+//                       'Email is not verified',
+//                       style: TextStyle(
+//                         fontSize: 14,
+//                         fontFamily: 'Roboto-Regular',
+//                         color: Colors.red,
+//                       ),
+//                     ),
+//                   ),
+//             const SizedBox(
+//               height: 30,
+//             ),
+//             _isSendingVerification
+//                 ? const Center(child: CircularProgressIndicator())
+//                 : Row(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     children: [
+//                       Center(
+//                         child: ElevatedButton(
+//                           style: ButtonStyle(
+//                             backgroundColor:
+//                                 MaterialStateProperty.all(Color(0xFF1F41BB)),
+//                           ),
+//                           onPressed: () async {
+//                             setState(() {
+//                               _isSendingVerification = true;
+//                             });
+//                             await _emailValidationController
+//                                 .sendingEmailVerification(widget.user);
+//                             setState(() {
+//                               _isSendingVerification = false;
+//                             });
+//                           },
+//                           child: const Text(
+//                             'Verify',
+//                             style: TextStyle(
+//                               color: Colors.white,
+//                               fontSize: 14,
+//                               fontFamily: 'Roboto-Regular',
+//                               fontWeight: FontWeight.w400,
+//                               height: 0,
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(
+//                         width: 30,
+//                       ),
+//                       TextButton.icon(
+//                         // <-- TextButton
+//                         onPressed: () async {
+//                           try {
+//                             User? user = await _emailValidationController
+//                                 .refreshEmail(widget.user);
+//                             if (user != null && user.emailVerified) {
+//                               Get.snackbar('Success : ',
+//                                   'Email has been verified successfully');
+//                               Get.off(const ProductList(),
+//                                   transition: Transition.leftToRightWithFade);
+//                             } else {
+//                               Get.snackbar('Failed : ',
+//                                   'Email has been not verified check your mail');
+//                             }
+//                           } catch (e) {}
+//                         },
+//                         icon: const Icon(
+//                           Icons.refresh,
+//                           size: 24.0,
+//                           color: Color(0xFF1F41BB),
+//                         ),
+//                         label: const Text(
+//                           'Check',
+//                           style: TextStyle(
+//                             fontSize: 13,
+//                             fontFamily: 'Roboto-Regular',
+//                           ),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//             const SizedBox(height: 36),
+//             _isSigningOut
+//                 ? const Center(child: CircularProgressIndicator())
+//                 : Center(
+//                     child: ElevatedButton(
+//                       style: ButtonStyle(
+//                         backgroundColor: MaterialStateProperty.all(Colors.grey),
+//                       ),
+//                       onPressed: () async {
+//                         setState(() {
+//                           _isSigningOut = true;
+//                         });
+//                         await FirebaseAuth.instance.signOut();
+//                         setState(() {
+//                           _isSigningOut = false;
+//                           Get.off(const ProductList(),
+//                               transition: Transition.rightToLeftWithFade);
+//                         });
+//                       },
+//                       child: const Text(
+//                         'Sign out',
+//                         style: TextStyle(
+//                           color: Colors.white,
+//                           fontSize: 14,
+//                           fontFamily: 'Poppins',
+//                           fontWeight: FontWeight.w400,
+//                           height: 0,
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//           ]),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
 
-import '../views/widgets/home_page.dart';
+import 'package:get/get.dart';
+import 'package:second_choice_flutter/views/widgets/home_page.dart';
+
+import '../views/widgets/settings_view.dart';
+import '../views/widgets/wellcome_page.dart';
 import 'email_validation_controller.dart';
 
 class EmailValidationScreen extends StatefulWidget {
   final User user;
-
   const EmailValidationScreen({super.key, required this.user});
 
   @override
@@ -19,8 +234,7 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
   final EmailValidationController _emailValidationController =
-      Get.put(EmailValidationController());
-
+  Get.put(EmailValidationController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,21 +244,23 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
           height: Get.height,
           child: Column(children: [
             const SizedBox(
-              height: 10,
+              height: 20
             ),
             const Center(
               child: Text(
                 'Verify your email address',
-                style: TextStyle(),
+                style: TextStyle(
+                  fontFamily: 'Roboto-Bold',
+                  fontSize: 18,color: Colors.orange
+                ),
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 15
             ),
             Center(
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.grey,
@@ -54,156 +270,160 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: 14
                     ),
                     Text(
                       'Name: ${widget.user.displayName}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
+                        fontFamily: 'Roboto-Regular',
                         fontWeight: FontWeight.w400,
+                        color: Colors.blue,
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
+                    SizedBox(
+                      height: 7
                     ),
                     Text(
                       'Email: ${widget.user.email}',
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: 13,
                         fontFamily: 'Roboto-Regular',
+                        color: Colors.green,
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 30,
             ),
             widget.user.emailVerified
-                ? const Center(
-                    child: Text(
-                      'Email is verified',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Roboto-Regular',
-                        color: Colors.lightGreenAccent,
-                      ),
-                    ),
-                  )
-                : const Center(
-                    child: Text(
-                      'Email is not verified',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Roboto-Regular',
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
-            const SizedBox(
+                ? Center(
+              child: Text(
+                'Email is verified',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Roboto-Regular',
+                  color: Colors.lightGreenAccent,
+                ),
+              ),
+            )
+                : Center(
+              child: Text(
+                'Email is not verified',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Roboto-Regular',
+                  color: Colors.red,
+                ),
+              ),
+            ),
+            SizedBox(
               height: 30,
             ),
             _isSendingVerification
                 ? const Center(child: CircularProgressIndicator())
                 : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0xFF1F41BB)),
-                          ),
-                          onPressed: () async {
-                            setState(() {
-                              _isSendingVerification = true;
-                            });
-                            await _emailValidationController
-                                .sendingEmailVerification(widget.user);
-                            setState(() {
-                              _isSendingVerification = false;
-                            });
-                          },
-                          child: const Text(
-                            'Verify',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontFamily: 'Roboto-Regular',
-                              fontWeight: FontWeight.w400,
-                              height: 0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      TextButton.icon(
-                        // <-- TextButton
-                        onPressed: () async {
-                          try {
-                            User? user = await _emailValidationController
-                                .refreshEmail(widget.user);
-                            if (user != null && user.emailVerified) {
-                              Get.snackbar('Success : ',
-                                  'Email has been verified successfully');
-                              Get.off(const ProductList(),
-                                  transition: Transition.leftToRightWithFade);
-                            } else {
-                              Get.snackbar('Failed : ',
-                                  'Email has been not verified check your mail');
-                            }
-                          } catch (e) {}
-                        },
-                        icon: const Icon(
-                          Icons.refresh,
-                          size: 24.0,
-                          color: Color(0xFF1F41BB),
-                        ),
-                        label: const Text(
-                          'Check',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontFamily: 'Roboto-Regular',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-            const SizedBox(height: 36),
-            _isSigningOut
-                ? const Center(child: CircularProgressIndicator())
-                : Center(
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.grey),
-                      ),
-                      onPressed: () async {
-                        setState(() {
-                          _isSigningOut = true;
-                        });
-                        await FirebaseAuth.instance.signOut();
-                        setState(() {
-                          _isSigningOut = false;
-                          Get.off(const ProductList(),
-                              transition: Transition.rightToLeftWithFade);
-                        });
-                      },
-                      child: const Text(
-                        'Sign out',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400,
-                          height: 0,
-                        ),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                      MaterialStateProperty.all(Color(0xFF1F41BB)),
+                    ),
+                    onPressed: () async {
+                      setState(() {
+                        _isSendingVerification = true;
+                      });
+                      await _emailValidationController
+                          .sendingEmailVerification(widget.user);
+                      setState(() {
+                        _isSendingVerification = false;
+                      });
+                    },
+                    child: Text(
+                      'Verify',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontFamily: 'Roboto-Regular',
+                        fontWeight: FontWeight.w400,
+                        height: 1,
                       ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                TextButton.icon(
+                  // <-- TextButton
+                  onPressed: () async {
+                    try {
+                      User? user = await _emailValidationController
+                          .refreshEmail(widget.user);
+                      if (user != null && user.emailVerified) {
+                        Get.snackbar('Success : ',
+                            'Email has been verified successfully');
+                        Get.off(const ProductList(),
+                            transition: Transition.leftToRightWithFade);
+                      } else {
+                        Get.snackbar('Failed : ',
+                            'Email has been not verified check your mail');
+                      }
+                    } catch (e) {}
+                  },
+                  icon: const Icon(
+                    Icons.refresh,
+                    size: 24.0,
+                    color: Color(0xFF1F41BB),
+                  ),
+                  label: Text(
+                    'Check',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontFamily: 'Roboto-Regular',
+                      color: Colors.yellow,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 36),
+            _isSigningOut
+                ? const Center(child: CircularProgressIndicator())
+                : Center(
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.grey),
+                ),
+                onPressed: () async {
+                  setState(() {
+                    _isSigningOut = true;
+                  });
+                  await FirebaseAuth.instance.signOut();
+                  setState(() {
+                    _isSigningOut = false;
+                    Get.off(const WelcomeScreen(),
+                        transition: Transition.rightToLeftWithFade);
+                  });
+                },
+                child: Text(
+                  'Sign out',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                  ),
+                ),
+              ),
+            ),
           ]),
         ),
       ),

@@ -36,7 +36,7 @@ class _ProductListState extends State<ProductList> {
         scaffoldKey: _scaffoldKey,
         preferredSize: const Size.fromHeight(70),
       ),
-      drawer: CustomDrawer(),
+      drawer: const DrawerWidget(),
       body: Column(
         children: [
           Expanded(
@@ -44,16 +44,7 @@ class _ProductListState extends State<ProductList> {
               future: _productController.getCarinformationData(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  // Return a loading indicator or placeholder widget
-                  //   return const SizedBox(
-                  //       width: 20,
-                  //       height: 20,
-                  //       child: Center(child: CircularProgressIndicator()));
-                  // } else if (snapshot.hasError) {
-                  //   // Handle error
-                  //   return Text('Error: ${snapshot.error}');
-                  // } else {
-                  // Data has been loaded successfully
+
                   List<QueryDocumentSnapshot<Object?>> data = snapshot.data!;
                   int dataLength = data.length;
                   return ListView.builder(

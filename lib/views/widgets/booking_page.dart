@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../model/product_model.dart';
+import 'confirmation.dart';
 
 class Book extends StatefulWidget {
   ProductModel productModel;
@@ -418,17 +419,33 @@ class _BookState extends State<Book> {
                                       MaterialStatePropertyAll(Size(190, 50))),
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
+                                  // Get the entered data
                                   String name = _nameController.text;
                                   String address = _addressController.text;
                                   String pincode = _pincodeController.text;
                                   String panNumber = _panController.text;
-                                  String aadhaarNumber =
-                                      _aadhaarController.text;
-                                  String advanceAmount =
-                                      _advanceAmountController.text;
+                                  String aadhaarNumber = _aadhaarController.text;
+                                  String advanceAmount = _advanceAmountController.text;
+
+                                  // Navigate to the confirmation page with the entered data
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ConfirmationPage(
+                                        name: name,
+                                        address: address,
+                                        pincode: pincode,
+                                        dist: Dist,
+                                        panNumber: panNumber,
+                                        aadhaarNumber: aadhaarNumber,
+                                        advanceAmount: advanceAmount,
+                                      ),
+                                    ),
+                                  );
                                 }
                               },
-                              child: Text('Proceed')),
+                            child: Text('Proceed'),
+                          ),
                         ],
                       ),
                     ),

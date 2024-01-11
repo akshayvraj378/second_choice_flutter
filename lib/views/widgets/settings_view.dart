@@ -1,4 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:second_choice_flutter/views/widgets/wellcome_page.dart';
 
 import '../../controller/getuserdata.dart';
 import '../../controller/google_sign_in.dart';
@@ -64,8 +69,12 @@ class _SetiState extends State<Seti> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ListTile(onTap: () {
-
+              child: ListTile(onTap: () async{
+                GoogleSignIn googleSignIn = GoogleSignIn();
+                FirebaseAuth _auth = FirebaseAuth.instance;
+                await _auth.signOut();
+                await googleSignIn.signOut();
+                Get.offAll(() => WelcomeScreen());
               },
                 tileColor: Colors.lightBlue[100],
                 shape:
