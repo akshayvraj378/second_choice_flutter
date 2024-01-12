@@ -116,7 +116,7 @@ class _FavPageState extends State<FavPage> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                            cartModel.carname.toString(),
+                                      cartModel.carname.toString(),
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w900,
                                         fontSize: 20,
@@ -135,7 +135,7 @@ class _FavPageState extends State<FavPage> {
                                                 Icons.calendar_today_rounded,
                                                 color: Colors.white70),
                                             Text(
-                                                cartModel.modelyear.toString(),
+                                              cartModel.modelyear.toString(),
                                               style: const TextStyle(
                                                   fontWeight: FontWeight
                                                       .w900),
@@ -148,7 +148,7 @@ class _FavPageState extends State<FavPage> {
                                                 color: Color.fromARGB(
                                                     1768, 255, 204, 0)),
                                             Text(
-                            cartModel.kms.toString(),
+                                              cartModel.kms.toString(),
                                               style: TextStyle(
                                                   fontWeight: FontWeight
                                                       .w900),
@@ -161,7 +161,7 @@ class _FavPageState extends State<FavPage> {
                                                 Icons.info_outline_rounded,
                                                 color: Colors.teal),
                                             Text(
-                            cartModel.fuel.toString(),
+                                              cartModel.fuel.toString(),
                                               style: const TextStyle(
                                                   fontWeight: FontWeight
                                                       .w900),
@@ -181,7 +181,7 @@ class _FavPageState extends State<FavPage> {
                                           children: [
                                             const Icon(Icons.currency_rupee),
                                             Text(
-                                                cartModel.prize.toString(),
+                                              cartModel.prize.toString(),
                                               style: const TextStyle(
                                                   fontWeight: FontWeight
                                                       .w900),

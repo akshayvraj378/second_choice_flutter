@@ -5,7 +5,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:second_choice_flutter/model/product_model.dart';
 import 'package:second_choice_flutter/views/widgets/booking_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:whatsapp_share/whatsapp_share.dart';
 import '../../controller/cart_controller.dart';
 
 class ProductDetails extends StatefulWidget {

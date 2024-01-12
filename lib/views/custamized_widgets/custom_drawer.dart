@@ -7,7 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:second_choice_flutter/views/widgets/home_page.dart';
 
 import '../../controller/getuserdata.dart';
-import '../widgets/fav_page';
+import '../widgets/Fav_page.dart';
 import '../widgets/settings_view.dart';
 import '../widgets/wellcome_page.dart';
 
@@ -151,7 +151,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FavPage(),));
+                    MaterialPageRoute(builder: (context) => const FavPage(),));
               },
             ),
           ),
