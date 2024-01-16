@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:lottie/lottie.dart';
 import 'package:second_choice_flutter/views/widgets/home_page.dart';
 import 'package:second_choice_flutter/views/widgets/registration_view.dart';
 import 'package:second_choice_flutter/views/widgets/sentotp.dart';
@@ -135,7 +136,14 @@ class _SignInState extends State<SignIn> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
+                            children: [Lottie.asset(
+                              'assets/json/loginpage.json', // Replace with your animation file
+                              width: double.infinity,
+                              height:  200,
+                              repeat: true, // Set to true if you want to loop the animation
+                              reverse: false, // Set to true if you want to play the animation in reverse
+                              animate: true,
+                            ),
                               getTextField(
                                   hint: "Email",
                                   icons: const Icon(Icons.email),
@@ -244,19 +252,25 @@ class _SignInState extends State<SignIn> {
                                               fontFamily: 'Roboto-Bold',
                                             ),
                                           ),
-                                  ))),SizedBox(height: 40),Row(mainAxisAlignment: MainAxisAlignment.center,
+                                  ))),
+                              SizedBox(height: 40),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     'Dont have any account?',
                                     style: TextStyle(color: Colors.white),
-                                  ),TextButton(onPressed: () {
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => SignUp(),
-                                        ),
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => SignUp(),
+                                            ),
                                             (route) => false);
-                                  }, child: Text('SignUp'))
+                                      },
+                                      child: Text('SignUp'))
                                 ],
                               ),
                             ],
@@ -279,7 +293,9 @@ class _SignInState extends State<SignIn> {
                             child: SizedBox(
                                 width: 60,
                                 height: 36,
-                                child: Image(image: AssetImage('assets/images/google.jpg'))),
+                                child: Image(
+                                    image: AssetImage(
+                                        'assets/images/google.jpg'))),
                           ),
                           SizedBox(
                             width: 10,
@@ -287,13 +303,14 @@ class _SignInState extends State<SignIn> {
                           GestureDetector(
                             onTap: () => Get.to(() => SendOtp()),
                             child: SizedBox(
-                                width: 60,
-                                height: 36,
-                                child:  Image(image: AssetImage('assets/images/phone.jpg'))),
+                                width: 65,
+                                height: 40,
+                                child: Image(
+                                    image:
+                                        AssetImage('assets/images/phon.jpg'))),
                           ),
                         ]),
                   ),
-                
                 ]),
           ),
         ),

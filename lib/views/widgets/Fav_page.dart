@@ -1,211 +1,293 @@
+//
+//
+// import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import '../../controller/cart_controller.dart';
+// import '../../model/product_model.dart';
+// import '../custamized_widgets/custom_appbar.dart';
+// import 'car_detail_page.dart';
+//
+// class FavPage extends StatefulWidget {
+//   const FavPage({Key? key}) : super(key: key);
+//
+//   @override
+//   _FavPageState createState() => _FavPageState();
+// }
+//
+// class _FavPageState extends State<FavPage> {
+//   User? user = FirebaseAuth.instance.currentUser;
+//   final CartItemController _cartItemController = Get.put(CartItemController());
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.black,
+//       body: StreamBuilder<QuerySnapshot>(
+//         stream: FirebaseFirestore.instance
+//             .collection('cart')
+//             .doc(user!.uid)
+//             .collection('cartOrders')
+//             .snapshots(),
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return Center(child: Container());
+//           }
+//
+//           if (snapshot.hasError) {
+//             return Center(child: Text('Error: ${snapshot.error}'));
+//           }
+//
+//           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+//             return Center(child: Text('No favorites found!'));
+//           }
+//
+//           List<QueryDocumentSnapshot> data = snapshot.data!.docs;
+//           int dataLength = data.length;
+//
+//           return ListView.builder(
+//             itemCount: dataLength,
+//             itemBuilder: (context, index) {
+//               ProductModel productModel = ProductModel(
+//                 productId: data[index]['productId'],
+//                 carimage: data[index]['carimage'],
+//                 carname: data[index]['carname'],
+//                 modelyear: data[index]['modelyear'],
+//                 kms: data[index]['kms'],
+//                 fuel: data[index]['fuel'],
+//                 prize: data[index]['prize'],
+//                 color: data[index]['color'],
+//                 owner: data[index]['owner'],
+//                 milage: data[index]['milage'],
+//                 engine: data[index]['engine'],
+//                 insure: data[index]['insure'],
+//                 polution: data[index]['polution'],
+//                 features: data[index]['features'],
+//                 specification: data[index]['specification'],
+//                 overview: data[index]['overview'],
+//               );
+//
+//               return GestureDetector(
+//                 onTap: () {
+//                   Get.to(() => ProductDetails(productModel: productModel));
+//                 },
+//                 child: Card(
+//                   color: Colors.lightBlue[50],
+//                   elevation: 8,
+//                   margin: const EdgeInsets.symmetric(
+//                       vertical: 15, horizontal: 40),
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(10.0),
+//                   ),
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       ClipRRect(
+//                         borderRadius:
+//                         const BorderRadius.vertical(top: Radius.circular(10)),
+//                         child: SizedBox(
+//                           height: 200,
+//                           width: double.infinity,
+//                           child: CachedNetworkImage(
+//                             fit: BoxFit.cover,
+//                             imageUrl: "${productModel.carimage![0]}",
+//                             placeholder: (context, url) => CircularProgressIndicator(),
+//                             errorWidget: (context, url, error) => Icon(Icons.error),
+//                           ),
+//                         ),
+//                       ),
+//                       Padding(
+//                         padding: const EdgeInsets.all(8.0),
+//                         child: Text(
+//                           "${productModel.carname}",
+//                           style: const TextStyle(
+//                             fontWeight: FontWeight.w900,
+//                             fontSize: 20,
+//                           ),
+//                         ),
+//                       ),
+//                       Padding(
+//                         padding: const EdgeInsets.all(8.0),
+//                         child: Text(
+//                           'Model Year: ${productModel.modelyear}',
+//                           style: TextStyle(fontSize: 16),
+//                         ),
+//                       ),
+//                       Padding(
+//                         padding: const EdgeInsets.all(8.0),
+//                         child: Text(
+//                           'Fuel: ${productModel.fuel}',
+//                           style: TextStyle(fontSize: 16),
+//                         ),
+//                       ),
+//                       Padding(
+//                         padding: const EdgeInsets.all(8.0),
+//                         child: Text(
+//                           'Price: ${productModel.prize}',
+//                           style: TextStyle(fontSize: 16),
+//                         ),
+//                       ),
+//                       Padding(
+//                         padding: const EdgeInsets.all(8.0),
+//                         child: Row(
+//                           children: [
+//                             const Icon(Icons.currency_rupee),
+//                             Text(
+//                               "${productModel.prize}",
+//                               style: const TextStyle(
+//                                 fontWeight: FontWeight.w900,
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               );
+//             },
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+//
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:second_choice_flutter/model/product_model.dart';
-
 import '../../controller/cart_controller.dart';
-import '../../model/cart_model.dart';
+import '../../model/product_model.dart';
+import '../custamized_widgets/custom_appbar.dart';
+import 'car_detail_page.dart';
 
 class FavPage extends StatefulWidget {
-  const FavPage({super.key});
+  const FavPage({Key? key}) : super(key: key);
 
   @override
-  State<FavPage> createState() => _FavPageState();
+  _FavPageState createState() => _FavPageState();
 }
 
 class _FavPageState extends State<FavPage> {
   User? user = FirebaseAuth.instance.currentUser;
-  final CartItemController cartItemController = Get.put(CartItemController());
+  final CartItemController _cartItemController = Get.put(CartItemController());
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          width: Get.width,
-          height: Get.height,
-          alignment: Alignment.center,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection('cart')
-                      .doc(user!.uid)
-                      .collection('cartOrders')
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text("Error"),
-                      );
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Container(
-                        height: Get.height / 5,
-                        child: Center(
-                          child: CupertinoActivityIndicator(),
+    return Scaffold(
+      appBar: AppBar(title: Text('Favourite Page'),backgroundColor: Colors.black,centerTitle: true),
+      backgroundColor: Colors.black,
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('cart')
+            .doc(user!.uid)
+            .collection('cartOrders')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Center(child: Text('No favorites found!',style: TextStyle(color: Colors.white),));
+          }
+
+          List<QueryDocumentSnapshot> data = snapshot.data!.docs;
+
+          return ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              ProductModel productModel = ProductModel(
+                productId: data[index]['productId'],
+                carimage: data[index]['carimage'],
+                carname: data[index]['carname'],
+                modelyear: data[index]['modelyear'],
+                kms: data[index]['kms'],
+                fuel: data[index]['fuel'],
+                prize: data[index]['prize'],
+                color: data[index]['color'],
+                owner: data[index]['owner'],
+                milage: data[index]['milage'],
+                engine: data[index]['engine'],
+                insure: data[index]['insure'],
+                polution: data[index]['polution'],
+                features: data[index]['features'],
+                specification: data[index]['specification'],
+                overview: data[index]['overview'],
+              );
+
+              return GestureDetector(
+                onTap: () {
+                  Get.to(() => ProductDetails(productModel: productModel));
+                },
+                child: Card(
+                  color: Colors.white,
+                  elevation: 8,
+                  margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+                        child: SizedBox(
+                          height: 200,
+                          width: double.infinity,
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: "${productModel.carimage![0]}",
+                            placeholder: (context, url) => CircularProgressIndicator(),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                          ),
                         ),
-                      );
-                    }
-
-                    if (snapshot.data!.docs.isEmpty) {
-                      return Center(
-                        child: Text("No products found!"),
-                      );
-                    }
-
-                    if (snapshot.data != null) {
-                      return SizedBox(
-                        child: ListView.builder(
-                          itemCount: snapshot.data!.docs.length,
-                          shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            final productData = snapshot.data!.docs[index];
-                            CartModel cartModel = CartModel(
-                              productId: productData['productId'],
-                              carimage: productData['carimage'],
-                              carname: productData['carname'],
-                              modelyear: productData['modelyear'],
-                              kms: productData['kms'],
-                              fuel: productData['fuel'],
-                              prize: productData['prize'],
-                              color: productData['color'],
-                              owner: productData['owner'],
-                              milage: productData['milage'],
-                              engine: productData['engine'],
-                              insure: productData['insure'],
-                              polution: productData['polution'],
-                              features: productData['features'],
-                              specification: productData['specification'],
-                              overview: productData['overview'],
-                            );
-
-                            //calculate price
-                            cartItemController.checkProductExistence(
-                                uId: 'uId', productModel: ProductModel());
-                            return Card(
-                              color: Colors.lightBlue[50],
-                              elevation: 8,
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 40),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Column(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.vertical(
-                                        top: Radius.circular(10)),
-                                    child: SizedBox(
-                                      height: 200,
-                                      width: double.infinity,
-                                      child: Image.network(
-                                        cartModel.carimage?[0],
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      cartModel.carname.toString(),
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                                Icons.calendar_today_rounded,
-                                                color: Colors.white70),
-                                            Text(
-                                              cartModel.modelyear.toString(),
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight
-                                                      .w900),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Icon(Icons.speed_rounded,
-                                                color: Color.fromARGB(
-                                                    1768, 255, 204, 0)),
-                                            Text(
-                                              cartModel.kms.toString(),
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight
-                                                      .w900),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Icon(
-                                                Icons.info_outline_rounded,
-                                                color: Colors.teal),
-                                            Text(
-                                              cartModel.fuel.toString(),
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight
-                                                      .w900),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            const Icon(Icons.currency_rupee),
-                                            Text(
-                                              cartModel.prize.toString(),
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight
-                                                      .w900),
-                                            )
-                                          ],
-                                        ),
-
-
-                                      ],
-                                    ),
-                                  )
-                                  // Other car details here
-                                ],
-                              ),
-                            );
-                          },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _buildText('${productModel.carname}', FontWeight.w900, 20),
+                          ],
                         ),
-                      );
-                    }
-
-                    return Container();
-                  },
+                      ),
+                      _buildText('Model Year: ${productModel.modelyear}', null, 16),
+                      _buildText('Fuel: ${productModel.fuel}', null, 16),
+                      _buildText('Price: ${productModel.prize}', null, 16),
+                      _buildText(
+                        'Total Price: ${productModel.prize}',
+                        FontWeight.w500,
+                        16,
+                      ),
+                    ],
+                  ),
                 ),
-              ]),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildText(String text, FontWeight? fontWeight, double fontSize) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontWeight: fontWeight,
+          fontSize: fontSize,
+          color: Colors.black, // Adjust text color
         ),
       ),
     );

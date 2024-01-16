@@ -7,15 +7,17 @@ import 'package:second_choice_flutter/views/widgets/wellcome_page.dart';
 
 import '../../controller/getuserdata.dart';
 import '../../controller/google_sign_in.dart';
+import '../../controller/lan_controller.dart';
 
 class Seti extends StatefulWidget {
-  const Seti({super.key});
+   Seti({super.key});
 
   @override
   State<Seti> createState() => _SetiState();
 }
 
 class _SetiState extends State<Seti> {
+
 
   bool SwitchOn = false;
   bool SwitchOnn = false;
@@ -212,4 +214,6 @@ class _SetiState extends State<Seti> {
       ),
     );
   }
+
 }
+

@@ -26,7 +26,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Drawer(backgroundColor: Colors.black54,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: const Radius.circular(20.0),
@@ -52,11 +52,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 // Data has been loaded successfully
                 List<QueryDocumentSnapshot<Object?>> data = snapshot.data!;
 
-                // Rest of your widget tree using the 'data'
-
+                if (data.isEmpty) {
+                  // If no data, show a test widget
+                  return _buildNoDataWidget();
+                }
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0, vertical: 20.0),
+                      horizontal: 10.0, vertical: 50.0),
                   child: ListTile(
                     titleAlignment: ListTileTitleAlignment.center,
                     title: Text(
@@ -99,15 +101,15 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               titleAlignment: ListTileTitleAlignment.center,
               title: Text(
                 "Home",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               ),
               leading: Icon(
                 Icons.home,
-                color: Colors.black,
+                color: Colors.white,
               ),
               trailing: Icon(
                 Icons.arrow_forward,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
           ),
@@ -117,7 +119,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               titleAlignment: ListTileTitleAlignment.center,
               title: const Text(
                 "Settings",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               ),
               leading: Icon(
                 Icons.settings,
@@ -125,6 +127,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
               trailing: Icon(
                 Icons.arrow_forward,
+                color: Colors.white,
 
               ),
               onTap: () {
@@ -139,15 +142,15 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               titleAlignment: ListTileTitleAlignment.center,
               title: Text(
                 "Favourate",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               ),
               leading: Icon(
                 Icons.shopping_bag,
-                color: Colors.orange,
+                color: Colors.pinkAccent,
               ),
               trailing: Icon(
                 Icons.arrow_forward,
-                color: Colors.orange,
+                color: Colors.white,
               ),
               onTap: () {
                 Navigator.push(context,
@@ -175,18 +178,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               titleAlignment: ListTileTitleAlignment.center,
               title: Text(
                 "Contact",
-
+                style: TextStyle(color: Colors.white),
               ),
               leading: Icon(
                 Icons.help,
-
+color: Colors.blue[100],
               ),
               trailing: Icon(
                 Icons.arrow_forward,
-
+color: Colors.white,
               ),
             ),
-          ),
+          ),SizedBox(height: 100,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: ListTile(
@@ -200,10 +203,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               titleAlignment: ListTileTitleAlignment.center,
               title: Text(
                 "Logout",
-                style: TextStyle(color: Colors.green),
+                style: TextStyle(color: Colors.red[100]),
               ),
               leading: Icon(
                 Icons.logout,
+                color: Colors.red[300],
 
               ),
               trailing: Icon(
@@ -217,4 +221,32 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
     );
   }
+}
+Widget _buildNoDataWidget() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(
+        horizontal: 10.0, vertical: 20.0),
+    child: ListTile(
+      titleAlignment: ListTileTitleAlignment.center,
+      title: Text(
+        '***********',
+        style: TextStyle(
+          color: Colors.green,
+          fontFamily: 'Roboto-Regular',
+          fontSize: 15,
+        ),
+      ),
+      subtitle: Text(
+       '*********@gmail.com',
+        style: TextStyle(
+            color: Colors.green,
+            fontFamily: 'Roboto-Regular',
+            fontSize: 10),
+      ),
+      leading: CircleAvatar(
+          radius: 22.0,
+          backgroundColor: Colors.blue,
+         ),
+    ),
+  );
 }

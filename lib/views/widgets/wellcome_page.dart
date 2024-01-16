@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 
 import 'package:get/route_manager.dart';
+import 'package:lottie/lottie.dart';
 import 'package:second_choice_flutter/views/widgets/registration_view.dart';
 
 import 'login_page.dart';
@@ -28,7 +29,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Center(
                   child: Container(
                     alignment: Alignment.center,
-                    child: Image(image: AssetImage('assets/images/google.jpg'),)
+                    child: Lottie.asset(
+                      'assets/json/caranimation.json', // Replace with your animation file
+                      width: double.infinity,
+                      height: double.infinity,
+                      repeat: true, // Set to true if you want to loop the animation
+                      reverse: false, // Set to true if you want to play the animation in reverse
+                      animate: true,
+                    ),
                   ),
                 )),
             Container(

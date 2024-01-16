@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.2"
+  archive:
+    dependency: transitive
+    description:
+      name: archive
+      sha256: "22600aa1e926be775fa5fe7e6894e7fb3df9efda8891c73f70fb3262399a432d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.10"
   args:
     dependency: transitive
     description:
@@ -61,26 +69,26 @@ packages:
     dependency: "direct main"
     description:
       name: cached_network_image
-      sha256: f98972704692ba679db144261172a8e20feb145636c617af0eb4022132a6797f
+      sha256: "28ea9690a8207179c319965c13cd8df184d5ee721ae2ce60f398ced1219cea1f"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "3.3.1"
   cached_network_image_platform_interface:
     dependency: transitive
     description:
       name: cached_network_image_platform_interface
-      sha256: "56aa42a7a01e3c9db8456d9f3f999931f1e05535b5a424271e9a38cabf066613"
+      sha256: "9e90e78ae72caa874a323d78fa6301b3fb8fa7ea76a8f96dc5b5bf79f283bf2f"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "4.0.0"
   cached_network_image_web:
     dependency: transitive
     description:
       name: cached_network_image_web
-      sha256: "759b9a9f8f6ccbb66c185df805fac107f05730b1dab9c64626d1008cca532257"
+      sha256: "42a835caa27c220d1294311ac409a43361088625a4f23c820b006dd9bffb3316"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   carousel_slider:
     dependency: "direct main"
     description:
@@ -584,6 +592,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  lottie:
+    dependency: "direct main"
+    description:
+      name: lottie
+      sha256: a93542cc2d60a7057255405f62252533f8e8956e7e06754955669fd32fb4b216
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
   matcher:
     dependency: transitive
     description:
@@ -728,6 +744,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.7"
+  pointycastle:
+    dependency: transitive
+    description:
+      name: pointycastle
+      sha256: "43ac87de6e10afabc85c445745a7b799e04de84cebaa4fd7bf55a5e1e9604d29"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.7.4"
   pub_semver:
     dependency: transitive
     description:
@@ -744,14 +768,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
-  shimmer:
-    dependency: "direct main"
-    description:
-      name: shimmer
-      sha256: "5f88c883a22e9f9f299e5ba0e4f7e6054857224976a5d9f839d4ebdc94a14ac9"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -861,6 +877,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0+1"
+  upi_india:
+    dependency: "direct main"
+    description:
+      name: upi_india
+      sha256: "483f1425ee8f0897397861b107e50b3aa195fec71215f86e906b625e841e90dd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   url_launcher:
     dependency: "direct main"
     description:
