@@ -181,100 +181,109 @@ class _FavPageState extends State<FavPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Favourite Page'),backgroundColor: Colors.black,centerTitle: true),
-      backgroundColor: Colors.black,
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('cart')
-            .doc(user!.uid)
-            .collection('cartOrders')
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
 
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
+      body: Container(decoration: BoxDecoration( gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Colors.black,
+          Colors.transparent,
+        ],
+      )),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('cart')
+              .doc(user?.uid)
+              .collection('cartOrders')
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(child: Text('No favorites found!',style: TextStyle(color: Colors.white),));
-          }
+            if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
 
-          List<QueryDocumentSnapshot> data = snapshot.data!.docs;
+            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+              return Center(child: Text('No favorites found!',style: TextStyle(color: Colors.white),));
+            }
 
-          return ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (context, index) {
-              ProductModel productModel = ProductModel(
-                productId: data[index]['productId'],
-                carimage: data[index]['carimage'],
-                carname: data[index]['carname'],
-                modelyear: data[index]['modelyear'],
-                kms: data[index]['kms'],
-                fuel: data[index]['fuel'],
-                prize: data[index]['prize'],
-                color: data[index]['color'],
-                owner: data[index]['owner'],
-                milage: data[index]['milage'],
-                engine: data[index]['engine'],
-                insure: data[index]['insure'],
-                polution: data[index]['polution'],
-                features: data[index]['features'],
-                specification: data[index]['specification'],
-                overview: data[index]['overview'],
-              );
+            List<QueryDocumentSnapshot> data = snapshot.data!.docs;
 
-              return GestureDetector(
-                onTap: () {
-                  Get.to(() => ProductDetails(productModel: productModel));
-                },
-                child: Card(
-                  color: Colors.white,
-                  elevation: 8,
-                  margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
-                        child: SizedBox(
-                          height: 200,
-                          width: double.infinity,
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: "${productModel.carimage![0]}",
-                            placeholder: (context, url) => CircularProgressIndicator(),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
+            return ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                ProductModel productModel = ProductModel(
+                  productId: data[index]['productId'],
+                  carimage: data[index]['carimage'],
+                  carname: data[index]['carname'],
+                  modelyear: data[index]['modelyear'],
+                  kms: data[index]['kms'],
+                  fuel: data[index]['fuel'],
+                  prize: data[index]['prize'],
+                  color: data[index]['color'],
+                  owner: data[index]['owner'],
+                  milage: data[index]['milage'],
+                  engine: data[index]['engine'],
+                  insure: data[index]['insure'],
+                  polution: data[index]['polution'],
+                  features: data[index]['features'],
+                  specification: data[index]['specification'],
+                  overview: data[index]['overview'],
+                );
+
+                return GestureDetector(
+                  onTap: () {
+                    Get.to(() => ProductDetails(productModel: productModel));
+                  },
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 8,
+                    margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+                          child: SizedBox(
+                            height: 200,
+                            width: double.infinity,
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: "${productModel.carimage![0]}",
+                              placeholder: (context, url) => CircularProgressIndicator(),
+                              errorWidget: (context, url, error) => Icon(Icons.error),
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _buildText('${productModel.carname}', FontWeight.w900, 20),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _buildText('${productModel.carname}', FontWeight.w900, 20),
+                            ],
+                          ),
                         ),
-                      ),
-                      _buildText('Model Year: ${productModel.modelyear}', null, 16),
-                      _buildText('Fuel: ${productModel.fuel}', null, 16),
-                      _buildText('Price: ${productModel.prize}', null, 16),
-                      _buildText(
-                        'Total Price: ${productModel.prize}',
-                        FontWeight.w500,
-                        16,
-                      ),
-                    ],
+                        _buildText('Model Year: ${productModel.modelyear}', null, 16),
+                        _buildText('Fuel: ${productModel.fuel}', null, 16),
+                        _buildText('Price: ${productModel.prize}', null, 16),
+                        _buildText(
+                          'Total Price: ${productModel.prize}',
+                          FontWeight.w500,
+                          16,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
-          );
-        },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

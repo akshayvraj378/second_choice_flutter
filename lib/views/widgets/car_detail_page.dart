@@ -34,7 +34,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
+
       appBar: AppBar(
         actions: [
           IconButton(
@@ -47,14 +47,23 @@ class _ProductDetailsState extends State<ProductDetails> {
         centerTitle: true,
         title: const Text('Vehicle Detail'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildCarImage(),
-            _buildDetailsCard(),
-            _buildImageGrid(),
-            _buildTabs(),
-          ],
+      body: Container(decoration: BoxDecoration( gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Colors.black,
+          Colors.transparent,
+        ],
+      )),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _buildCarImage(),
+              _buildDetailsCard(),
+              _buildImageGrid(),
+              _buildTabs(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: NavigationBar(
@@ -89,7 +98,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             decoration: BoxDecoration(
               boxShadow: const [
                 BoxShadow(
-                  blurRadius: 8,
+                  blurRadius: 3,
                   color: Colors.grey,
                 ),
               ],

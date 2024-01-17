@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:second_choice_flutter/views/widgets/home_page.dart';
 import 'package:second_choice_flutter/views/widgets/wellcome_page.dart';
+
+import '../custamized_widgets/bottum.dart';
 
 
 
@@ -31,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> logInCheck(BuildContext context) async {
     if (user != null) {
-      Get.offAll(() => const ProductList(),
+      Get.offAll(() => const NavigationScreen(),
           transition: Transition.leftToRightWithFade);
     } else {
       Get.to(() => const WelcomeScreen(),
@@ -55,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Center(
                     child: Container(
                       alignment: Alignment.center,
-                      child: SizedBox(
+                      child: const SizedBox(
                           width: 227,
                           height: 49.48,
                           child:Icon(Icons.thumb_up_alt_outlined)),

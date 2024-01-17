@@ -2,9 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:second_choice_flutter/views/widgets/home_page.dart';
-
 import '../model/user_model.dart';
+import '../views/custamized_widgets/bottum.dart';
 import '../views/widgets/verifyotp.dart';
 import 'get_device_token_controller.dart';
 
@@ -93,7 +92,7 @@ class SentOtpController extends GetxController {
 
       // Navigate to the next screen or perform any other action
       // For example, you might want to navigate to a home screen
-      Get.offAll(() => const ProductList());
+      Get.offAll(() => const NavigationScreen());
     } catch (e) {
       // Handle exceptions
       Get.snackbar("Error", "Verification Failed: $e");
