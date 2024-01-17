@@ -55,6 +55,7 @@ dependencies:
   email_validator: ^2.1.17
   upi_india: ^3.0.1
   lottie: ^2.7.0
+  dot_navigation_bar: ^1.0.2
 
 
 

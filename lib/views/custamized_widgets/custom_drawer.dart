@@ -132,7 +132,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Seti(),));
+                    context, MaterialPageRoute(builder: (context) => SettingsPage(),));
               },
             ),
           ),

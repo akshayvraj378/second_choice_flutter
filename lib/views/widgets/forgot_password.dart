@@ -117,7 +117,7 @@ backgroundColor: Colors.black,
                             }
                           }
                         },
-                        child: Text('Rest password',
+                        child: Text('Reset password',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,

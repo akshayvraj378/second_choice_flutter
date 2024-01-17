@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:second_choice_flutter/views/custamized_widgets/bottum.dart';
+import 'package:second_choice_flutter/views/custamized_widgets/example.dart';
+import 'package:second_choice_flutter/views/widgets/home_page.dart';
+import 'package:second_choice_flutter/views/widgets/lootie.dart';
 import 'package:second_choice_flutter/views/widgets/splashscreen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +30,8 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return  const GetMaterialApp(
+    return   const GetMaterialApp(
+      debugShowCheckedModeBanner: false,
 
        home: SplashScreen(),
     );

@@ -37,55 +37,64 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+
       key: _scaffoldKey,
       appBar: CustomAppBar(
         scaffoldKey: _scaffoldKey,
         preferredSize: const Size.fromHeight(70),
       ),
       drawer: const DrawerWidget(),
-      body: Column(
-        children: [
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: _productController.getCarinformationDataStream(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  configLoading();
-                  return Center(child: CustomLoadingIndicator());
-                }
-
-                if (snapshot.hasError) {
-                  configLoading();
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                }
-
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  configLoading();
-                  return Center(child: Text('No products found!'));
-                }
-
-                List<QueryDocumentSnapshot> data = snapshot.data!.docs;
-                int dataLength = data.length;
-
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: dataLength,
-                  itemBuilder: (context, index) {
-                    return ProductListItem(
-                      data: data[index],
-                      cartItemController: cartItemController,
-                      productController: _productController,
-                      isFavoriteList: isFavoriteList,
-                      scaffoldKey: _scaffoldKey,
-                      user: user!,
-                    );
-                  },
-                );
-              },
-            ),
-          ),
+      body: Container(decoration: BoxDecoration( gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Colors.black,
+          Colors.transparent,
         ],
+      )),
+        child: Column(
+          children: [
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: _productController.getCarinformationDataStream(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    configLoading();
+                    return Center(child: CustomLoadingIndicator());
+                  }
+
+                  if (snapshot.hasError) {
+                    configLoading();
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    configLoading();
+                    return Center(child: Text('No products found!'));
+                  }
+
+                  List<QueryDocumentSnapshot> data = snapshot.data!.docs;
+                  int dataLength = data.length;
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: dataLength,
+                    itemBuilder: (context, index) {
+                      return ProductListItem(
+                        data: data[index],
+                        cartItemController: cartItemController,
+                        productController: _productController,
+                        isFavoriteList: isFavoriteList,
+                        scaffoldKey: _scaffoldKey,
+                        user: user!,
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -327,3 +336,4 @@ class CustomLoadingIndicator extends StatelessWidget {
     );
   }
 }
+

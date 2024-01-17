@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:second_choice_flutter/views/widgets/home_page.dart';
-
+import '../views/custamized_widgets/bottum.dart';
 import '../views/widgets/wellcome_page.dart';
 import 'email_validation_controller.dart';
 
@@ -159,7 +158,7 @@ class _EmailValidationScreenState extends State<EmailValidationScreen> {
                       if (user != null && user.emailVerified) {
                         Get.snackbar('Success : ',
                             'Email has been verified successfully');
-                        Get.off(const ProductList(),
+                        Get.off(const NavigationScreen(),
                             transition: Transition.leftToRightWithFade);
                       } else {
                         Get.snackbar('Failed : ',

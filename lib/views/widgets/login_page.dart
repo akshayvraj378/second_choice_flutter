@@ -10,6 +10,7 @@ import 'package:second_choice_flutter/views/widgets/sentotp.dart';
 import 'package:second_choice_flutter/views/widgets/wellcome_page.dart';
 import '../../controller/email_password_controller.dart';
 import '../../controller/google_sign_in.dart';
+import '../custamized_widgets/bottum.dart';
 import '../validator/validator.dart';
 import 'forgot_password.dart';
 
@@ -228,7 +229,7 @@ class _SignInState extends State<SignIn> {
                                           if (userCredential!
                                               .user!.emailVerified) {
                                             final user = userCredential.user;
-                                            Get.off(() => const ProductList(),
+                                            Get.off(() => const NavigationScreen(),
                                                 transition: Transition
                                                     .leftToRightWithFade);
                                           }

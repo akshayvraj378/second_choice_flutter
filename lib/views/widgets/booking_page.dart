@@ -61,7 +61,7 @@ class _BookState extends State<Book> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text('Book Your Car'),
@@ -69,9 +69,14 @@ class _BookState extends State<Book> {
       ),
       body: Form(
         key: _formKey,
-        child: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
+        child: Container(decoration: BoxDecoration( gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.black,
+            Colors.transparent,
+          ],
+        )),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
